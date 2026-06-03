@@ -1,0 +1,56 @@
+<div class="terminal-container" [class.light-theme]="isLightTheme">
+
+<header class="terminal-header">
+   <div class="logo">FocusRoom</div>
+   <button class="theme-toggle-btn" (click)="toggleTheme()">
+   🌓 SWITCH THEME
+   </button>
+</header>
+
+<main class="terminal-core">
+   
+   <section class="station-selector">
+   <button class="station-btn active">Synthwave</button>
+   <button class="station-btn">Minimal Techno</button>
+   <button class="station-btn">Ambient Flow</button>
+   </section>
+
+   <section class="control-deck">
+   <div class="visualizer-placeholder">
+      <div class="mock-wave"></div>
+   </div>
+
+   <button class="main-play-btn">
+      <span class="icon">▶</span>
+      <span class="label">START</span>
+   </button>
+   </section>
+
+   <section class="mixer-console">
+   <h3 class="mixer-title">BACKGROUND SOUNDS</h3>
+   
+   <div class="sliders-grid">
+      <div class="mixer-channel">
+         <label>Brown Noise</label>
+         <input type="range" min="0" max="1" step="0.05" value="0">
+      </div>
+
+      <div class="mixer-channel">
+         <label>Rainforest</label>
+         <input type="range" min="0" max="1" step="0.05" value="0">
+      </div>
+
+      <div class="mixer-channel">
+         <label>Coffee Shop</label>
+         <input type="range" min="0" max="1" step="0.05" value="0">
+      </div>
+   </div>
+   </section>
+
+</main>
+
+<footer class="terminal-footer">
+   <p>ev_j</p>
+</footer>
+
+</div>
