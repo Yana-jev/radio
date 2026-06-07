@@ -10,9 +10,13 @@
 <main class="terminal-core">
    
    <section class="station-selector">
-   <button class="station-btn active">Synthwave</button>
-   <button class="station-btn">Minimal Techno</button>
-   <button class="station-btn">Ambient Flow</button>
+      @for(track of tracks; track track.id){
+      <button 
+      class="station-btn"
+      [class.active]="isTrackActive(track.id)"
+      (click)="onSelectTrack(track.id)">
+      {{ track.name }}
+   </button>}
    </section>
 
    <section class="control-deck">
@@ -20,9 +24,12 @@
       <div class="mock-wave"></div>
    </div>
 
-   <button class="main-play-btn">
-      <span class="icon">▶</span>
-      <span class="label">START</span>
+   <button 
+      class="main-play-btn" 
+      (click)="onTogglePlay()"
+      [disabled]="!audioEngine.currentTrackId()">
+      <span class="icon">{{ audioEngine.isPlaying() ? '⏸' : '▶' }}</span>
+      <span class="label">{{ audioEngine.isPlaying() ? 'PAUSE' : 'START' }}</span>
    </button>
    </section>
 
@@ -30,19 +37,15 @@
    <h3 class="mixer-title">BACKGROUND SOUNDS</h3>
    
    <div class="sliders-grid">
-      <div class="mixer-channel">
-         <label>Brown Noise</label>
-         <input type="range" min="0" max="1" step="0.05" value="0">
-      </div>
-
-      <div class="mixer-channel">
-         <label>Rainforest</label>
-         <input type="range" min="0" max="1" step="0.05" value="0">
-      </div>
-
-      <div class="mixer-channel">
-         <label>Coffee Shop</label>
-         <input type="range" min="0" max="1" step="0.05" value="0">
+      <div class="mixer-channel" *ngFor="let channel of noiseChannels()">
+         <label>{{ channel.icon }} {{ channel.name }}</label>
+         <input 
+         type="range" 
+         min="0" 
+         max="1" 
+         step="0.05" 
+         [value]="channel.volume"
+         (input)="onVolumeChange(channel.id, $event)">
       </div>
    </div>
    </section>
@@ -50,7 +53,11 @@
 </main>
 
 <footer class="terminal-footer">
-   <p>ev_j</p>
+   <p>
+   <span>BPM {{ currentBpm }}</span>
+   · 
+   <span>STATUS: {{ audioEngine.isPlaying() ? 'FOCUSING' : 'IDLE' }}</span>
+   </p>
 </footer>
 
 </div>
