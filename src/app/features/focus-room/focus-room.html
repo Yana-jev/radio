@@ -1,7 +1,9 @@
 <div class="app-space" [class.light-theme]="isLightTheme">
 
 <header class="app-header">
-    <div class="brand-logo">focus<span>room</span></div>
+<div class="brand-logo">
+  focus<span class="divider" [class.rotate]="audioEngine.isPlaying()">/</span>room
+</div>
     
     <button class="glass-theme-btn" (click)="toggleTheme()">
       {{ isLightTheme ? '🌙 DEEP NIGHT' : '☀️ SOFT LIGHT' }}
