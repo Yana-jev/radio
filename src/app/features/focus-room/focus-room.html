@@ -2,6 +2,7 @@
 
 <header class="app-header">
     <div class="brand-logo">focus<span>room</span></div>
+    
     <button class="glass-theme-btn" (click)="toggleTheme()">
       {{ isLightTheme ? '🌙 DEEP NIGHT' : '☀️ SOFT LIGHT' }}
     </button>
@@ -28,17 +29,15 @@
   [disabled]="!audioEngine.currentTrackId()">
   
   <canvas #particlesCanvas></canvas>
-  
-  <span class="play-icon">{{ audioEngine.isPlaying() ? '⏸' : '▶' }}</span>
 </button>
 
 <div class="track-status-text">
-    {{ audioEngine.isPlaying() ? 'Погружение в фокус...' : 'Плеер готов' }}
+    {{ audioEngine.isPlaying() ? 'Focusing...' : 'Click the particles to focus' }}
 </div>
 </section>
 
     <section class="ambient-mixer">
-      <h3 class="mixer-headline">Фоновое окружение</h3>
+      <h3 class="mixer-headline">Ambient Environment</h3>
     
       <div class="ambient-stack">
         @for (channel of noiseChannels(); track channel.id) {
@@ -62,12 +61,5 @@
     </section>
 
 </main>
-
-<footer class="app-footer">
-    <div class="status-pill">
-      <span class="pulse-dot" [class.pulse-active]="audioEngine.isPlaying()"></span>
-      BPM: {{ currentBpm }} // {{ audioEngine.isPlaying() ? 'ACTIVE' : 'STANDBY' }}
-    </div>
-</footer>
 
 </div>

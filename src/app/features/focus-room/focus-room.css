@@ -13,8 +13,6 @@
   --text-on-active: #ffffff;
   --accent-color: #9d4edd;      
   --accent-glow: rgba(157, 78, 221, 0.4);
-
-  /* Цвета атомов: Пурпурные с неоновой подсветкой */
   --atom-color: #9d4edd;
   --atom-glow: rgba(157, 78, 221, 0.8);
 }
@@ -31,8 +29,6 @@
   --text-on-active: #0f172a;
   --accent-color: #06b6d4; 
   --accent-glow: rgba(6, 182, 212, 0.35);
-
-  /* Цвета атомов: Темно-серые с бирюзовой подсветкой */
   --atom-color: #334155;
   --atom-glow: rgba(6, 182, 212, 0.9);
 }
@@ -91,10 +87,7 @@
 }
 
 /* ==========================================================================
-   4. КВАНТОВЫЙ ВИЗУАЛИЗАТОР (ОБЛАКО АТОМОВ)
-   ========================================================================== */
- /* ==========================================================================
-   4. КВАНТОВЫЙ ВИЗУАЛИЗАТОР (NATIVE HTML5 CANVAS)
+   4. КВАНТОВЫЙ ВИЗУАЛИЗАТОР (CANVAS )
    ========================================================================== */
 .visualizer-zone {
   display: flex;
@@ -103,7 +96,6 @@
   margin-bottom: 40px;
 }
 
-/* Наша гигантская сфера-кнопка */
 .atomic-sphere-btn {
   position: relative;
   display: flex;
@@ -120,7 +112,6 @@
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Холст разворачивается строго на всю площадь кнопки */
 .atomic-sphere-btn canvas {
   position: absolute;
   top: 0;
@@ -128,33 +119,18 @@
   width: 100%;
   height: 100%;
   pointer-events: none; 
-  z-index: 1/* Клик проходит сквозь холст прямо на кнопку */
+  z-index: 1;
 }
 
-/* Благородный ховер без цветных грязных пятен */
 .atomic-sphere-btn:hover:not(:disabled) {
   transform: scale(1.03);
 }
-.atomic-sphere-btn:hover:not(:disabled) .play-icon {
-  opacity: 0.75;
-  transform: scale(1.1);
-}
+
 .atomic-sphere-btn:disabled { 
   opacity: 0.1; 
   cursor: not-allowed; 
 }
 
-/* Элегантный полупрозрачный символ плеера в самом центре туманности */
-.atomic-sphere-btn .play-icon {
-  top: 50%;
-  left: 50%;
-  z-index: 10;
-  font-size: 2rem;
-  color: var(--text-primary);
-  opacity: 0.25;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
 /* ==========================================================================
    5. МИКШЕР ШУМОВ
    ========================================================================== */
@@ -185,11 +161,3 @@
 }
 .ambient-row input[type="range"]::-moz-range-thumb:hover { transform: scale(1.25); background: var(--glass-border-active); }
 
-/* ==========================================================================
-   6. ФУТЕР
-   ========================================================================== */
-.app-footer { display: flex; justify-content: center; font-size: 0.7rem; color: var(--text-secondary); font-weight: 700; letter-spacing: 0.5px; }
-.status-pill { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 8px 16px; border-radius: 30px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(10px); }
-.pulse-dot { width: 6px; height: 6px; background-color: var(--text-secondary); border-radius: 50%; }
-.pulse-dot.pulse-active { background-color: var(--accent-color); box-shadow: 0 0 10px var(--accent-color); animation: dot-glow 1.2s infinite ease-in-out; }
-@keyframes dot-glow { 0%, 100% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }

@@ -57,7 +57,8 @@ private initAtoms(){
     this.atoms.push({
         x: centerX + Math.cos(angle) * radiusFromCenter,
         y: centerY + Math.sin(angle) * radiusFromCenter,
-        vx: (Math.random() - 0.5) * 0.4,//speed from -0.2 to 0.2
+        //speed from -0.2 to 0.2
+        vx: (Math.random() - 0.5) * 0.4, 
         vy: (Math.random() - 0.5) * 0.4,
         radius: Math.random() * 1.5 + 1, 
         alpha: Math.random() * 0.5 + 0.45,
@@ -67,7 +68,7 @@ private initAtoms(){
   }
 
 private animate() {
-    this.animationId = requestAnimationFrame(() => this.animate()); //is called60 times per second
+    this.animationId = requestAnimationFrame(() => this.animate()); //is called 60 times per second
 
     this.ctx.clearRect(0, 0, 280, 280);     //clear all
     
