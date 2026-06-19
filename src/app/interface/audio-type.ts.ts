@@ -14,3 +14,13 @@ export interface NoiseChannel {
   volume: number;    
   audio?: HTMLAudioElement; 
 }
+
+export interface Atom {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  alpha: number;
+  alphaSpeed: number;
+}

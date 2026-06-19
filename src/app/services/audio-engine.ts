@@ -19,9 +19,10 @@ readonly musicTracks: MusicTrack[] = [
     { id: 'cafe', name: 'Coffee Shop', icon: '☕', url: 'assets/audio/cafe.mp3', volume: 0 }
   ]);
 
-  // 2. СОСТОЯНИЕ ПЛЕЕРА (Используем Signals для реактивности)
+
   readonly currentTrackId = signal<string | null>(null);
   readonly isPlaying = signal<boolean>(false);
+
   private currentMusicAudio?: HTMLAudioElement;
 
   // 3. УПРАВЛЕНИЕ МУЗЫКАЛЬНЫМ ТРЕКОМ
@@ -44,7 +45,7 @@ readonly musicTracks: MusicTrack[] = [
     }
   }
 
-
+  // Главный старт / пауза (Кнопка START/PAUSE)
   togglePlay() {
     if (!this.currentTrackId()) return; // Если трек не выбран, ничего не делаем
 

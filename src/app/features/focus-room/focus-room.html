@@ -1,63 +1,73 @@
-<div class="terminal-container" [class.light-theme]="isLightTheme">
+<div class="app-space" [class.light-theme]="isLightTheme">
 
-<header class="terminal-header">
-   <div class="logo">FocusRoom</div>
-   <button class="theme-toggle-btn" (click)="toggleTheme()">
-   🌓 SWITCH THEME
-   </button>
+<header class="app-header">
+    <div class="brand-logo">focus<span>room</span></div>
+    <button class="glass-theme-btn" (click)="toggleTheme()">
+      {{ isLightTheme ? '🌙 DEEP NIGHT' : '☀️ SOFT LIGHT' }}
+    </button>
 </header>
 
-<main class="terminal-core">
-   
-   <section class="station-selector">
-      @for(track of tracks; track track.id){
-      <button 
-      class="station-btn"
-      [class.active]="isTrackActive(track.id)"
-      (click)="onSelectTrack(track.id)">
-      {{ track.name }}
-   </button>}
-   </section>
+<main class="blur-card">
+    
+    <nav class="track-pill-selector">
+      @for (track of tracks; track track.id) {
+        <button 
+            class="pill-btn"
+            [class.active]="isTrackActive(track.id)"
+            (click)="onSelectTrack(track.id)">
+            {{ track.name }}
+        </button>
+      }
+    </nav>
 
-   <section class="control-deck">
-   <div class="visualizer-placeholder">
-      <div class="mock-wave"></div>
-   </div>
+<section class="visualizer-zone">
+<button 
+  class="atomic-sphere-btn" 
+  [class.active]="audioEngine.isPlaying()"
+  (click)="onTogglePlay()"
+  [disabled]="!audioEngine.currentTrackId()">
+  
+  <canvas #particlesCanvas></canvas>
+  
+  <span class="play-icon">{{ audioEngine.isPlaying() ? '⏸' : '▶' }}</span>
+</button>
 
-   <button 
-      class="main-play-btn" 
-      (click)="onTogglePlay()"
-      [disabled]="!audioEngine.currentTrackId()">
-      <span class="icon">{{ audioEngine.isPlaying() ? '⏸' : '▶' }}</span>
-      <span class="label">{{ audioEngine.isPlaying() ? 'PAUSE' : 'START' }}</span>
-   </button>
-   </section>
+<div class="track-status-text">
+    {{ audioEngine.isPlaying() ? 'Погружение в фокус...' : 'Плеер готов' }}
+</div>
+</section>
 
-   <section class="mixer-console">
-   <h3 class="mixer-title">BACKGROUND SOUNDS</h3>
-   
-   <div class="sliders-grid">
-      <div class="mixer-channel" *ngFor="let channel of noiseChannels()">
-         <label>{{ channel.icon }} {{ channel.name }}</label>
-         <input 
-         type="range" 
-         min="0" 
-         max="1" 
-         step="0.05" 
-         [value]="channel.volume"
-         (input)="onVolumeChange(channel.id, $event)">
+    <section class="ambient-mixer">
+      <h3 class="mixer-headline">Фоновое окружение</h3>
+    
+      <div class="ambient-stack">
+        @for (channel of noiseChannels(); track channel.id) {
+            <div class="ambient-row">
+              <div class="ambient-info">
+                <span class="ambient-icon">{{ channel.icon }}</span>
+                <span class="ambient-name">{{ channel.name }}</span>
+              </div>
+              <div class="slider-wrapper">
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="1" 
+                  step="0.05" 
+                  [value]="channel.volume"
+                  (input)="onVolumeChange(channel.id, $event)">
+              </div>
+            </div>
+        }
       </div>
-   </div>
-   </section>
+    </section>
 
 </main>
 
-<footer class="terminal-footer">
-   <p>
-   <span>BPM {{ currentBpm }}</span>
-   · 
-   <span>STATUS: {{ audioEngine.isPlaying() ? 'FOCUSING' : 'IDLE' }}</span>
-   </p>
+<footer class="app-footer">
+    <div class="status-pill">
+      <span class="pulse-dot" [class.pulse-active]="audioEngine.isPlaying()"></span>
+      BPM: {{ currentBpm }} // {{ audioEngine.isPlaying() ? 'ACTIVE' : 'STANDBY' }}
+    </div>
 </footer>
 
 </div>
