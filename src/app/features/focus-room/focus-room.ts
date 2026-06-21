@@ -58,8 +58,8 @@ private initAtoms(){
         x: centerX + Math.cos(angle) * radiusFromCenter,
         y: centerY + Math.sin(angle) * radiusFromCenter,
         //speed from -0.2 to 0.2
-        vx: (Math.random() - 0.5) * 0.4, 
-        vy: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.25, 
+        vy: (Math.random() - 0.5) * 0.25,
         radius: Math.random() * 1.5 + 1, 
         alpha: Math.random() * 0.5 + 0.45,
         alphaSpeed: 0.003 + Math.random() * 0.007
@@ -92,11 +92,11 @@ private animate() {
     // gravity
     const force = (135 - dist) * 0.00025;
     
-    atom.vx += force * (-dy / currentDist) - dx * 0.00006;
-    atom.vy += force * (dx / currentDist) - dy * 0.00006;
+    atom.vx += force * (-dy / currentDist) - dx * 0.00003;
+    atom.vy += force * (dx / currentDist) - dy * 0.00003;
     
-    atom.x += atom.vx * 0.8;
-    atom.y += atom.vy * 0.8;
+    atom.x += atom.vx * 0.4;
+    atom.y += atom.vy * 0.4;
   } else {
     // pause
     atom.x += atom.vx * 0.25;

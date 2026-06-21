@@ -2,11 +2,11 @@
 
 <header class="app-header">
 <div class="brand-logo">
-  focus<span class="divider" [class.rotate]="audioEngine.isPlaying()">/</span>room
+  focus<span class="divider" [class.pulse-line]="audioEngine.isPlaying()">|</span> room
 </div>
     
     <button class="glass-theme-btn" (click)="toggleTheme()">
-      {{ isLightTheme ? '🌙 DEEP NIGHT' : '☀️ SOFT LIGHT' }}
+      {{ isLightTheme ? '🌙 Deep Light' : '☀️ Soft Light' }}
     </button>
 </header>
 

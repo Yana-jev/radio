@@ -14,9 +14,9 @@ readonly musicTracks: MusicTrack[] = [
 
   // Сигнал для каналов шума, чтобы интерфейс мгновенно реагировал на изменения
   readonly noiseChannels = signal<NoiseChannel[]>([
-    { id: 'brown', name: 'Brown Noise', icon: '🟫', url: 'assets/audio/brown-noise.mp3', volume: 0 },
-    { id: 'rain', name: 'Rainforest', icon: '🌧', url: 'assets/audio/rain.mp3', volume: 0 },
-    { id: 'cafe', name: 'Coffee Shop', icon: '☕', url: 'assets/audio/cafe.mp3', volume: 0 }
+    { id: '1', name: 'Ocean Waves', icon: '🌊', url: 'assets/audio/ocean_waves.mp3', volume: 0 },
+    { id: '2', name: 'Rainforest', icon: '🌧', url: 'assets/audio/rain.mp3', volume: 0 },
+    { id: '3', name: 'Spaceship cabin', icon: '🛸', url: 'assets/audio/spaceship_cabin.mp3', volume: 0 }
   ]);
 
 
