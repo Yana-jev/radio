@@ -37,7 +37,23 @@
     {{ audioEngine.isPlaying() ? 'Focusing...' : 'Click the particles to focus' }}
 </div>
 </section>
-
+<section class="master-volume-zone">
+  <div class="ambient-row">
+    <div class="ambient-info">
+      <span class="ambient-icon">🎵</span>
+      <span class="ambient-name">Music Volume</span>
+    </div>
+    <div class="slider-wrapper">
+      <input 
+        type="range" 
+        min="0" 
+        max="1" 
+        step="0.05" 
+        [value]="audioEngine.musicVolume()"
+        (input)="onMusicVolumeChange($event)">
+    </div>
+  </div>
+</section>
     <section class="ambient-mixer">
       <h3 class="mixer-headline">Ambient Environment</h3>
     

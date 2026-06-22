@@ -62,6 +62,7 @@
   display: flex;
   align-items: center;
   user-select: none;
+  margin: 8px 8px;
 }
 
 /* stick */
@@ -105,23 +106,43 @@
 }
 
 /* ==========================================================================
-   3. main card
+  3. main card
    ========================================================================== */
 .blur-card {
-  margin: auto; background: var(--glass-bg); border: 1px solid var(--glass-border);
-  border-radius: 28px; padding: 16px; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transition: background 0.3s ease;
+  margin: 0 auto; /* Убрали auto по вертикали, оставили только по горизонтали */
+  width: 100%;
+  background: var(--glass-bg); 
+  border: 1px solid var(--glass-border);
+  border-radius: 28px; 
+  padding: 16px; 
+  backdrop-filter: blur(25px); 
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
+  transition: background 0.3s ease;
 }
 
 .track-pill-selector {
-  display: flex; background: rgba(0, 0, 0, 0.05); padding: 4px; border-radius: 16px; gap: 4px; margin-bottom: 40px; border: 1px solid var(--glass-border);
+  display: flex; background: rgba(0, 0, 0, 0.05); padding: 4px; border-radius: 16px; gap: 4px; margin-bottom: 16px; border: 1px solid var(--glass-border);
 }
 .app-space.light-theme .track-pill-selector { background: rgba(255, 255, 255, 0.3); }
 
 .pill-btn {
-  flex: 1; background: transparent; border: 1px solid transparent; color: var(--text-secondary);
-  font-family: inherit; padding: 10px 14px; font-size: 0.85rem; font-weight: 600; border-radius: 30px;
-  cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+  flex: 1; 
+  background: transparent; 
+  border: 1px solid transparent; 
+  color: var(--text-secondary);
+  font-family: inherit; 
+  padding: 8px 6px; /* Уменьшили боковые отступы, чтобы тексту было свободнее */
+  font-size: 0.8rem; /* Чуть-чуть уменьшили шрифт */
+  font-weight: 600; 
+  border-radius: 30px;
+  cursor: pointer; 
+  transition: all 0.2s ease;
+  
+  /* Разрешаем перенос и центрируем текст */
+  white-space: normal; 
+  line-height: 1.2;
+  text-align: center;
 }
 .pill-btn:hover { color: var(--text-primary); background: var(--glass-bg-hover); }
 .pill-btn.active {
@@ -176,7 +197,7 @@
 /* ==========================================================================
   5. mixer noises
    ========================================================================== */
-.ambient-mixer { border-top: 1px solid var(--glass-border); padding-top: 28px; }
+.ambient-mixer { border-top: 1px solid var(--glass-border); padding-top: 16px; }
 .mixer-headline { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0; margin-bottom: 24px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
 .ambient-stack { display: flex; flex-direction: column; gap: 20px; }
 .ambient-row { display: flex; justify-content: space-between; align-items: center; }
@@ -185,12 +206,22 @@
 .ambient-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
 .slider-wrapper { flex: 1; display: flex; justify-content: flex-end; }
 
-/* Ползунки */
+/* rows */
 .ambient-row input[type="range"] {
   -webkit-appearance: none; appearance: none; width: 85%; background: rgba(0, 0, 0, 0.15); height: 5px; border-radius: 10px; outline: none; border: 1px solid var(--glass-border);
 }
-.app-space.light-theme .ambient-row input[type="range"] {
-  background: rgba(15, 23, 42, 0.08); border: 1px solid rgba(15, 23, 42, 0.15);
+.app-space {
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Выравниваем контент от верхнего края */
+  gap: 20px; /* Фиксированный или адаптивный зазор между шапкой и карточкой */
+  padding: 16px; /* Чуть увеличили паддинг, чтобы на мобилках не прилипало к краям экрана */
+  box-sizing: border-box;
+  transition: background 0.5s ease, color 0.3s ease;
 }
 
 .ambient-row input[type="range"]::-webkit-slider-thumb {
@@ -203,3 +234,7 @@
 }
 .ambient-row input[type="range"]::-moz-range-thumb:hover { transform: scale(1.25); background: var(--glass-border-active); }
 
+.master-volume-zone {
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+}

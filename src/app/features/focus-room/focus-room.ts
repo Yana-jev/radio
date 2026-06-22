@@ -69,7 +69,6 @@ private initAtoms(){
 
 private animate() {
     this.animationId = requestAnimationFrame(() => this.animate()); //is called 60 times per second
-
     this.ctx.clearRect(0, 0, 280, 280);     //clear all
     
     const centerX = 140;
@@ -114,14 +113,10 @@ private animate() {
     atom.vx = -atom.vx * 0.8;
     atom.vy = -atom.vy * 0.8;
   }
-
-
   atom.alpha += atom.alphaSpeed;
   if (atom.alpha > 0.95 || atom.alpha < 0.3) {
     atom.alphaSpeed *= -1;
   }
-
-
   this.ctx.beginPath();
   this.ctx.arc(atom.x, atom.y, atom.radius, 0, Math.PI * 2);
   this.ctx.fillStyle = `rgba(${color}, ${atom.alpha})`;
@@ -129,7 +124,10 @@ private animate() {
 });
   }
 
-
+onMusicVolumeChange(event: Event){
+  const input = event.target as HTMLInputElement;
+  this.audioEngine.setMusicVolume(parseFloat(input.value))
+}
   toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
   }
