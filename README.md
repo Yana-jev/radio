@@ -1,59 +1,52 @@
-# Radio
+# Focus Room 🎧✨
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.2.
+A minimalist focus ambience website built with **Angular**. It features a beautiful, audio-reactive particle sphere on an HTML5 Canvas and a custom background noise mixer.
 
-## Development server
+Designed to help users relax, study, or lock into deep focus with cozy sounds and smooth visuals.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🚀 Live Demo
+*Link your deployed website here (e.g., Vercel / Netlify)*
+> **Live Link:** 
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Tech Stack
 
-## Code scaffolding
+* **Framework:** Angular (v21)
+* **State Management:** Angular Signals (for fast and modern reactive updates)
+* **Graphics:** HTML5 Canvas API (2D)
+* **Styling:** CSS Variables (for smooth Light/Dark theme switching)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## 🌟 Key Features
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 1. Audio-Reactive Particle Animation
+The central sphere has 250 small particles ("atoms") animated at 60 FPS using `requestAnimationFrame`.
+* **Pause Mode:** Particles move very slowly and lazy in random directions.
+* **Music Mode (Vortex Effect):** When music plays, particles are pulled toward the center. By swapping X and Y values in the speed formula, they turn 90 degrees and start spinning, creating a beautiful whirlpool effect.
+* **Smart Speed:** Particles spin much faster when they get closer to the center, making the vortex look alive and natural.
+* **Screen Borders:** If a particle flies outside the 135px circle, the code smoothly teleports it back and bounces it inward like a soft rubber ball.
 
-```bash
-ng generate --help
-```
+### 2. Audio Engine & Lazy Loading
+The sound dashboard lets you mix different background ambient noises (like Rain, Campfire, or White Noise).
+* **Traffic Saving (Lazy Loading):** Audio files are downloaded *only* when the user moves that specific sound slider for the first time. This saves the user's internet data and computer memory.
+* **Angular Signals:** Volume changes are perfectly synchronized between the UI sliders and the browser audio player.
 
-## Building
+### 3. Light & Dark Themes
+You can easily switch between Light and Dark modes. The particles instantly change their color (Slate-Grey for light mode, Neon-Purple for dark mode) while keeping their smooth twinkling effect.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 📦 How to Run Locally
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Make sure you have [Node.js](https://nodejs.org/) installed.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/focus-room.git](https://github.com/your-username/focus-room.git)
+   cd focus-room
+   npm install
+   ng serve
+   ng build
