@@ -48,10 +48,18 @@
   box-sizing: border-box;
   transition: background 0.5s ease, color 0.3s ease;
 }
+
 .app-space * { box-sizing: border-box; }
 
-.app-header, .blur-card { max-width: 480px; width: 100%; margin: 0 auto; }
-.app-header { display: flex; justify-content: space-between; align-items: center; }
+.app-header, .blur-card { 
+  max-width: 480px; 
+  width: 100%; 
+  margin: 0 auto;
+}
+.app-header {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; }
 
 .brand-logo { 
   font-size: 1.1rem; 
@@ -93,23 +101,41 @@
     filter: drop-shadow(0 0 8px var(--accent-color));
   }
 }
+
 .glass-theme-btn {
-  background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);
-  padding: 8px 16px; margin: 8px 8px; border-radius: 30px; cursor: pointer; font-size: 0.75rem; font-weight: 600;
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: all 0.25s ease;
-  font-family: inherit; padding: 10px 14px; font-size: 0.85rem; font-weight: 600; 
+  background: var(--glass-bg); 
+  border: 1px solid var(--glass-border); 
+  color: var(--text-primary);
+  padding: 8px 16px; margin: 8px 8px; 
+  border-radius: 30px; 
+  cursor: pointer; 
+  font-size: 0.75rem; 
+  font-weight: 600;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+  transition: all 0.25s ease;
+  font-family: inherit; 
+  padding: 10px 14px; 
+  font-size: 0.85rem; 
+  font-weight: 600; 
 }
-.glass-theme-btn:hover { background: var(--glass-bg-hover); border-color: var(--text-primary); transform: translateY(-1px); }
+.glass-theme-btn:hover { 
+  background: var(--glass-bg-hover); 
+  border-color: var(--text-primary); 
+  transform: translateY(-1px);
+}
 
 .track-status-text{
-  font-family: inherit; padding: 10px 14px; font-size: 0.85rem; font-weight: 600; 
+  font-family: inherit; 
+  padding: 10px 14px; 
+  font-size: 0.85rem; 
+  font-weight: 600; 
 }
 
 /* ==========================================================================
   3. main card
    ========================================================================== */
 .blur-card {
-  margin: 0 auto; /* Убрали auto по вертикали, оставили только по горизонтали */
+  margin: 0 auto; 
   width: 100%;
   background: var(--glass-bg); 
   border: 1px solid var(--glass-border);
@@ -122,9 +148,18 @@
 }
 
 .track-pill-selector {
-  display: flex; background: rgba(0, 0, 0, 0.05); padding: 4px; border-radius: 16px; gap: 4px; margin-bottom: 16px; border: 1px solid var(--glass-border);
+  display: flex; 
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px; 
+  border-radius: 16px; 
+  gap: 4px; 
+  margin-bottom: 16px; 
+  border: 1px solid var(--glass-border);
 }
-.app-space.light-theme .track-pill-selector { background: rgba(255, 255, 255, 0.3); }
+
+.app-space.light-theme .track-pill-selector { 
+  background: rgba(255, 255, 255, 0.3); 
+}
 
 .pill-btn {
   flex: 1; 
@@ -132,23 +167,28 @@
   border: 1px solid transparent; 
   color: var(--text-secondary);
   font-family: inherit; 
-  padding: 8px 6px; /* Уменьшили боковые отступы, чтобы тексту было свободнее */
-  font-size: 0.8rem; /* Чуть-чуть уменьшили шрифт */
+  padding: 8px 6px; 
+  font-size: 0.8rem; 
   font-weight: 600; 
   border-radius: 30px;
   cursor: pointer; 
   transition: all 0.2s ease;
-  
-  /* Разрешаем перенос и центрируем текст */
   white-space: normal; 
   line-height: 1.2;
   text-align: center;
 }
-.pill-btn:hover { color: var(--text-primary); background: var(--glass-bg-hover); }
-.pill-btn.active {
-  background: var(--glass-bg-active); border-color: var(--glass-border-active); color: var(--text-on-active); box-shadow: 0 4px 15px -3px var(--accent-glow);
+
+.pill-btn:hover { 
+  color: var(--text-primary); 
+  background: var(--glass-bg-hover); 
 }
 
+.pill-btn.active {
+  background: var(--glass-bg-active); 
+  border-color: var(--glass-border-active); 
+  color: var(--text-on-active); 
+  box-shadow: 0 4px 15px -3px var(--accent-glow);
+}
 /* ==========================================================================
   4. vizualizer (CANVAS )
    ========================================================================== */
@@ -197,18 +237,60 @@
 /* ==========================================================================
   5. mixer noises
    ========================================================================== */
-.ambient-mixer { border-top: 1px solid var(--glass-border); padding-top: 16px; }
-.mixer-headline { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0; margin-bottom: 24px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
-.ambient-stack { display: flex; flex-direction: column; gap: 20px; }
-.ambient-row { display: flex; justify-content: space-between; align-items: center; }
-.ambient-info { display: flex; align-items: center; gap: 12px; flex: 1; }
-.ambient-icon { font-size: 1.1rem; filter: drop-shadow(0 0 4px var(--accent-glow)); }
-.ambient-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
-.slider-wrapper { flex: 1; display: flex; justify-content: flex-end; }
+.ambient-mixer { 
+  border-top: 1px solid var(--glass-border); 
+  padding-top: 16px;
+}
+.mixer-headline {
+  font-size: 0.8rem; 
+  color: var(--text-secondary); 
+  margin-top: 0; 
+  margin-bottom: 24px; 
+  font-weight: 700; 
+  letter-spacing: 0.8px; 
+  text-transform: uppercase;
+}
+.ambient-stack { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px; 
+}
+.ambient-row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+.ambient-info { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  flex: 1; 
+}
+.ambient-icon { 
+  font-size: 1.1rem; 
+  filter: drop-shadow(0 0 4px var(--accent-glow)); 
+}
+.ambient-name { 
+  font-size: 0.85rem; 
+  font-weight: 600; 
+  color: var(--text-primary); 
+}
+.slider-wrapper { 
+  flex: 1; 
+  display: flex; 
+  justify-content: flex-end; 
+}
 
 /* rows */
 .ambient-row input[type="range"] {
-  -webkit-appearance: none; appearance: none; width: 85%; background: rgba(0, 0, 0, 0.15); height: 5px; border-radius: 10px; outline: none; border: 1px solid var(--glass-border);
+  -webkit-appearance: none; 
+  appearance: none; 
+  width: 85%; 
+  background: rgba(0, 0, 0, 0.15); 
+  height: 5px; 
+  border-radius: 10px; 
+  outline: none; 
+  border: 1px solid var(--glass-border);
 }
 .app-space {
   background: var(--bg-gradient);
@@ -217,22 +299,43 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Выравниваем контент от верхнего края */
-  gap: 20px; /* Фиксированный или адаптивный зазор между шапкой и карточкой */
-  padding: 16px; /* Чуть увеличили паддинг, чтобы на мобилках не прилипало к краям экрана */
+  justify-content: flex-start; 
+  gap: 20px; 
+  padding: 16px; 
   box-sizing: border-box;
   transition: background 0.5s ease, color 0.3s ease;
 }
 
 .ambient-row input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--text-primary); border: 1px solid var(--glass-border-active); cursor: pointer; transition: all 0.15s ease; box-shadow: 0 0 8px var(--accent-glow);
+  -webkit-appearance: none; 
+  appearance: none; 
+  width: 14px; 
+  height: 14px; 
+  border-radius: 50%; 
+  background: var(--text-primary); 
+  border: 1px solid var(--glass-border-active); 
+  cursor: pointer; 
+  transition: all 0.15s ease; 
+  box-shadow: 0 0 8px var(--accent-glow);
 }
-.ambient-row input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.25); background: var(--glass-border-active); }
+.ambient-row input[type="range"]::-webkit-slider-thumb:hover { 
+  transform: scale(1.25); 
+  background: var(--glass-border-active); 
+}
 
 .ambient-row input[type="range"]::-moz-range-thumb {
-  width: 14px; height: 14px; border: 1px solid var(--glass-border-active); border-radius: 50%; background: var(--text-primary); cursor: pointer; transition: all 0.15s ease; box-shadow: 0 0 8px var(--accent-glow);
+  width: 14px; 
+  height: 14px; 
+  border: 1px solid var(--glass-border-active); 
+  border-radius: 50%; 
+  background: var(--text-primary); 
+  cursor: pointer; 
+  transition: all 0.15s ease; 
+  box-shadow: 0 0 8px var(--accent-glow);
 }
-.ambient-row input[type="range"]::-moz-range-thumb:hover { transform: scale(1.25); background: var(--glass-border-active); }
+.ambient-row input[type="range"]::-moz-range-thumb:hover { 
+  transform: scale(1.25); 
+  background: var(--glass-border-active); }
 
 .master-volume-zone {
   margin-bottom: 4px;

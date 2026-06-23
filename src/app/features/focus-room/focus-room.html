@@ -12,31 +12,31 @@
 
 <main class="blur-card">
     
-    <nav class="track-pill-selector">
-      @for (track of tracks; track track.id) {
-        <button 
-            class="pill-btn"
-            [class.active]="isTrackActive(track.id)"
-            (click)="onSelectTrack(track.id)">
-            {{ track.name }}
-        </button>
-      }
-    </nav>
+<nav class="track-pill-selector">
+  @for (track of tracks; track track.id) {
+    <button 
+        class="pill-btn"
+        [class.active]="isTrackActive(track.id)"
+        (click)="onSelectTrack(track.id)">
+        {{ track.name }}
+    </button>
+  }
+</nav>
 
 <section class="visualizer-zone">
-<button 
-  class="atomic-sphere-btn" 
-  [class.active]="audioEngine.isPlaying()"
-  (click)="onTogglePlay()"
-  [disabled]="!audioEngine.currentTrackId()">
-  
-  <canvas #particlesCanvas></canvas>
-</button>
-
+    <button 
+      class="atomic-sphere-btn" 
+      [class.active]="audioEngine.isPlaying()"
+      (click)="onTogglePlay()"
+      [disabled]="!audioEngine.currentTrackId()">
+      
+      <canvas #particlesCanvas></canvas>
+    </button>
 <div class="track-status-text">
     {{ audioEngine.isPlaying() ? 'Focusing...' : 'Click the particles to focus' }}
-</div>
+  </div>
 </section>
+
 <section class="master-volume-zone">
   <div class="ambient-row">
     <div class="ambient-info">
@@ -54,29 +54,30 @@
     </div>
   </div>
 </section>
-    <section class="ambient-mixer">
-      <h3 class="mixer-headline">Ambient Environment</h3>
-    
-      <div class="ambient-stack">
-        @for (channel of noiseChannels(); track channel.id) {
-            <div class="ambient-row">
-              <div class="ambient-info">
-                <span class="ambient-icon">{{ channel.icon }}</span>
-                <span class="ambient-name">{{ channel.name }}</span>
-              </div>
-              <div class="slider-wrapper">
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="1" 
-                  step="0.05" 
-                  [value]="channel.volume"
-                  (input)="onVolumeChange(channel.id, $event)">
-              </div>
-            </div>
-        }
-      </div>
-    </section>
+
+<section class="ambient-mixer">
+  <h3 class="mixer-headline">Ambient Environment</h3>
+
+  <div class="ambient-stack">
+    @for (channel of noiseChannels(); track channel.id) {
+        <div class="ambient-row">
+          <div class="ambient-info">
+            <span class="ambient-icon">{{ channel.icon }}</span>
+            <span class="ambient-name">{{ channel.name }}</span>
+          </div>
+          <div class="slider-wrapper">
+            <input 
+              type="range" 
+              min="0" 
+              max="1" 
+              step="0.05" 
+              [value]="channel.volume"
+              (input)="onVolumeChange(channel.id, $event)">
+          </div>
+        </div>
+    }
+  </div>
+</section>
 
 </main>
 
