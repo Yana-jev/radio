@@ -29,7 +29,9 @@
       [class.active]="audioEngine.isPlaying()"
       (click)="onTogglePlay()"
       [disabled]="!audioEngine.currentTrackId()">
-      
+      @if (!audioEngine.isPlaying() && audioEngine.currentTrackId()) {
+        <span class="play-icon">▶</span>
+      }
       <canvas #particlesCanvas></canvas>
     </button>
 <div class="track-status-text">

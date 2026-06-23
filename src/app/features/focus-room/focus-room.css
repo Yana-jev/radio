@@ -190,7 +190,7 @@
   box-shadow: 0 4px 15px -3px var(--accent-glow);
 }
 /* ==========================================================================
-  4. vizualizer (CANVAS )
+  4. vizualizer
    ========================================================================== */
 .visualizer-zone {
   display: flex;
@@ -225,8 +225,31 @@
   z-index: 1;
 }
 
-.atomic-sphere-btn:hover:not(:disabled) {
-  transform: scale(1.03);
+/* ==========================================================================
+  4. vizualizer (CANVAS )
+   ========================================================================== */
+
+
+.play-icon {
+  position: absolute;
+  font-size: 3.5rem;          
+  color: var(--text-primary);
+  z-index: 10;               
+  pointer-events: none;       
+  opacity: 0.75;
+  filter: drop-shadow(0 0 15px var(--accent-glow)); 
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(4px, 0); 
+}
+
+
+.atomic-sphere-btn:hover:not(:disabled) .play-icon {
+  opacity: 1;
+  transform: translate(4px, 0) scale(1.1);
+  filter: drop-shadow(0 0 20px var(--accent-color));
 }
 
 .atomic-sphere-btn:disabled { 

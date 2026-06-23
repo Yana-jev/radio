@@ -14,7 +14,6 @@ export class AudioEngineService {
   ];
 
   // noises signal
-
   readonly noiseChannels = signal<NoiseChannel[]>([
     { id: '1', name: 'Ocean Waves', icon: '🌊', url: 'assets/audio/ocean_waves.mp3', volume: 0 },
     { id: '2', name: 'Rainforest', icon: '🌧', url: 'assets/audio/rain.mp3', volume: 0 },
