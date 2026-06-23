@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AudioEngineService } from '../../services/audio-engine';
 import { CommonModule } from '@angular/common';
-import { Atom } from '../../interface/audio-type.ts';
+import { Atom } from '../../interface/audio-type';
+
 
 @Component({
   selector: 'app-focus-room',

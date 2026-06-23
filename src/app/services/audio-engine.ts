@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
+import { MusicTrack, NoiseChannel } from '../interface/audio-type';
 
-import { MusicTrack, NoiseChannel } from '../interface/audio-type.ts';
+
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +75,7 @@ export class AudioEngineService {
       channels.map((ch) => {
         if (ch.id === id) {
           ch.volume = volume;
-          
+
           // lazy loading
           if (!ch.audio) {
             ch.audio = new Audio(ch.url);
