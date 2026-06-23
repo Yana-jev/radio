@@ -1,8 +1,15 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { AudioEngineService } from '../../services/audio-engine';
 import { CommonModule } from '@angular/common';
 import { Atom } from '../../interface/audio-type';
-
 
 @Component({
   selector: 'app-focus-room',
@@ -11,7 +18,6 @@ import { Atom } from '../../interface/audio-type';
   styleUrl: './focus-room.css',
 })
 export class FocusRoom implements OnInit, AfterViewInit, OnDestroy {
-
   @ViewChild('particlesCanvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   protected audioEngine = inject(AudioEngineService);
   isLightTheme = false;
@@ -21,114 +27,110 @@ export class FocusRoom implements OnInit, AfterViewInit, OnDestroy {
   private animationId!: number;
   private numAtoms = 250;
 
-  ngOnInit(){
+  ngOnInit() {
     const firstTrack = this.audioEngine.musicTracks[0];
-    if(firstTrack){
-      this.audioEngine.selectTrack(firstTrack.id)
-          }
+    if (firstTrack) {
+      this.audioEngine.selectTrack(firstTrack.id);
+    }
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d')!;
     canvas.width = 280;
     canvas.height = 280;
-    this.initAtoms()
-    this.animate()
+    this.initAtoms();
+    this.animate();
   }
 
   ngOnDestroy(): void {
-    if(this.animationId){
-      cancelAnimationFrame(this.animationId)
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
     }
   }
 
-
   //animation
 
-private initAtoms(){
-  this.atoms = [];
-  const centerX = 140;
-  const centerY = 140;
+  private initAtoms() {
+    this.atoms = [];
+    const centerX = 140;
+    const centerY = 140;
+    for (let i = 0; i < this.numAtoms; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const radiusFromCenter = Math.random() * 135;
 
-  for( let i = 0; i < this.numAtoms; i++){
-    const angle = Math.random() * Math.PI  * 2;
-    const radiusFromCenter = Math.random() * 135;
-
-    this.atoms.push({
+      this.atoms.push({
         x: centerX + Math.cos(angle) * radiusFromCenter,
         y: centerY + Math.sin(angle) * radiusFromCenter,
         //speed from -0.2 to 0.2
-        vx: (Math.random() - 0.5) * 0.25, 
+        vx: (Math.random() - 0.5) * 0.25,
         vy: (Math.random() - 0.5) * 0.25,
-        radius: Math.random() * 1.5 + 1, 
+        radius: Math.random() * 1.5 + 1,
         alpha: Math.random() * 0.5 + 0.45,
-        alphaSpeed: 0.003 + Math.random() * 0.007
+        alphaSpeed: 0.003 + Math.random() * 0.007,
       });
     }
   }
 
-private animate() {
+  private animate() {
     this.animationId = requestAnimationFrame(() => this.animate()); //is called 60 times per second
-    this.ctx.clearRect(0, 0, 280, 280);     //clear all
-    
+    this.ctx.clearRect(0, 0, 280, 280); //clear all
+
     const centerX = 140;
     const centerY = 140;
     const isPlaying = this.audioEngine.isPlaying();
-    
+
     // color for each theme
     const color = this.isLightTheme ? '51, 65, 85' : '157, 78, 221';
 
-    this.atoms.forEach (atom => {
-  const dx = atom.x - centerX; //from atom to center horizontal
-  const dy = atom.y - centerY; // from atom to center vertical
-  const dist = Math.sqrt(dx * dx + dy * dy); // from atom to center (hipotenuse)
+    this.atoms.forEach((atom) => {
+      const dx = atom.x - centerX; //from atom to center horizontal
+      const dy = atom.y - centerY; // from atom to center vertical
+      const dist = Math.sqrt(dx * dx + dy * dy); // from atom to center (hipotenuse)
 
-  if (isPlaying) {
-    // vortex
-    // if dist === 0, put 1 to avoid dividing by zero
-    const currentDist = dist || 1; 
-    
-    // gravity
-    const force = (135 - dist) * 0.00025;
-    
-    atom.vx += force * (-dy / currentDist) - dx * 0.00003;
-    atom.vy += force * (dx / currentDist) - dy * 0.00003;
-    
-    atom.x += atom.vx * 0.4;
-    atom.y += atom.vy * 0.4;
-  } else {
-    // pause
-    atom.x += atom.vx * 0.25;
-    atom.y += atom.vy * 0.25;
+      if (isPlaying) {
+        // vortex
+        // if dist === 0, put 1 to avoid dividing by zero
+        const currentDist = dist || 1;
+
+        // gravity
+        const force = (135 - dist) * 0.00025;
+
+        atom.vx += force * (-dy / currentDist) - dx * 0.00003;
+        atom.vy += force * (dx / currentDist) - dy * 0.00003;
+
+        atom.x += atom.vx * 0.4;
+        atom.y += atom.vy * 0.4;
+      } else {
+        // pause
+        atom.x += atom.vx * 0.25;
+        atom.y += atom.vy * 0.25;
+      }
+
+      // radius protect
+      // the atom will bounce off if it flies outside the circle
+      if (dist > 135) {
+        const currentDist = dist || 1;
+        atom.x = centerX + (dx / currentDist) * 133;
+        atom.y = centerY + (dy / currentDist) * 133;
+        atom.vx = -atom.vx * 0.8;
+        atom.vy = -atom.vy * 0.8;
+      }
+      atom.alpha += atom.alphaSpeed;
+      if (atom.alpha > 0.95 || atom.alpha < 0.3) {
+        atom.alphaSpeed *= -1;
+      }
+      this.ctx.beginPath();
+      this.ctx.arc(atom.x, atom.y, atom.radius, 0, Math.PI * 2);
+      this.ctx.fillStyle = `rgba(${color}, ${atom.alpha})`;
+      this.ctx.fill();
+    });
   }
 
-
-  // radius protect
-  // the atom will bounce off if it flies outside the circle
-  if (dist > 135) {
-    const currentDist = dist || 1;
-    atom.x = centerX + (dx / currentDist) * 133;
-    atom.y = centerY + (dy / currentDist) * 133;
-    
-    atom.vx = -atom.vx * 0.8;
-    atom.vy = -atom.vy * 0.8;
+  onMusicVolumeChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.audioEngine.setMusicVolume(parseFloat(input.value));
   }
-  atom.alpha += atom.alphaSpeed;
-  if (atom.alpha > 0.95 || atom.alpha < 0.3) {
-    atom.alphaSpeed *= -1;
-  }
-  this.ctx.beginPath();
-  this.ctx.arc(atom.x, atom.y, atom.radius, 0, Math.PI * 2);
-  this.ctx.fillStyle = `rgba(${color}, ${atom.alpha})`;
-  this.ctx.fill();
-});
-  }
-
-onMusicVolumeChange(event: Event){
-  const input = event.target as HTMLInputElement;
-  this.audioEngine.setMusicVolume(parseFloat(input.value))
-}
   toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
   }
@@ -160,9 +162,9 @@ onMusicVolumeChange(event: Event){
 
   get currentBpm(): number | string {
     const currentId = this.audioEngine.currentTrackId();
-    if (!currentId) return '---'; 
+    if (!currentId) return '---';
 
-    const track = this.audioEngine.musicTracks.find(t => t.id === currentId);
+    const track = this.audioEngine.musicTracks.find((t) => t.id === currentId);
     return track ? track.bpm : '---';
   }
 }
