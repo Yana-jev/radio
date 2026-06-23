@@ -341,3 +341,9 @@
   margin-bottom: 4px;
   padding-bottom: 4px;
 }
+
+@media (max-width: 768px) {
+  .master-volume-zone {
+    display: none !important;
+  }
+}

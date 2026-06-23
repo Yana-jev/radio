@@ -26,37 +26,6 @@ export class AudioEngineService {
   readonly musicVolume = signal<number>(0.5);
   private currentMusicAudio?: HTMLAudioElement;
 
-  private audioContext?: AudioContext;
-  private musicGainNode?: GainNode;
-  private audioSource?: MediaElementAudioSourceNode;
-
-
-  private initAudioContext() {
-    if (!this.audioContext) {
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    }
-    if (this.audioContext.state === 'suspended') {
-      this.audioContext.resume();
-    }
-  }
-
-
-  private setupWebAudio(audioElement: HTMLAudioElement) {
-    this.initAudioContext();
-  
-    if (this.audioSource) {
-      this.audioSource.disconnect();
-    }
-    if (this.audioContext) {
-      this.audioSource = this.audioContext.createMediaElementSource(audioElement);
-      if (!this.musicGainNode) {
-        this.musicGainNode = this.audioContext.createGain();
-      }
-      this.audioSource.connect(this.musicGainNode);
-      this.musicGainNode.connect(this.audioContext.destination);
-      this.musicGainNode.gain.value = this.musicVolume();
-    }
-  }
   // tracks control
   selectTrack(trackId: string) {
     if (this.currentMusicAudio) {
@@ -67,31 +36,23 @@ export class AudioEngineService {
     if (track) {
       this.currentMusicAudio = new Audio(track.url);
       this.currentMusicAudio.loop = true;
-      this.currentMusicAudio.crossOrigin = 'anonymous';
       this.currentMusicAudio.volume = this.musicVolume();
-      this.setupWebAudio(this.currentMusicAudio);
-
       if (this.isPlaying()) {
         this.currentMusicAudio.play().catch((err) => console.log('waiting user action...', err));
       }
     }
   }
 
-setMusicVolume(volume: number) {
+  setMusicVolume(volume: number) {
     this.musicVolume.set(volume);
-  
     if (this.currentMusicAudio) {
       this.currentMusicAudio.volume = volume;
-    }
-    if (this.musicGainNode) {
-      this.musicGainNode.gain.value = volume;
     }
   }
 
   // main start
   togglePlay() {
-    if (!this.currentTrackId()) return; 
-    this.initAudioContext();
+    if (!this.currentTrackId()) return; // Если трек не выбран, ничего не делаем
     const newState = !this.isPlaying();
     this.isPlaying.set(newState);
     if (newState) {
