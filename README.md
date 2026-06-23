@@ -13,7 +13,7 @@ Designed to help users relax, study, or lock into deep focus with cozy sounds an
 
 ## 🛠️ Tech Stack
 
-* **Framework:** Angular (v17+)
+* **Framework:** Angular (v21)
 * **State Management:** Angular Signals (for fast and modern reactive updates)
 * **Graphics:** HTML5 Canvas API (2D)
 * **Styling:** CSS Variables (for smooth Light/Dark theme switching)
